@@ -125,3 +125,41 @@
 00:01:38.064372 db@janitor F·5 G·1
 00:01:38.064390 db@janitor removing table-25
 00:01:38.064444 db@open done T·6.045147ms
+=============== Jul 22, 2023 (CST) ===============
+00:19:11.093388 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+00:19:11.093682 version@stat F·[1 1] S·19KiB[404B 19KiB] Sc·[0.25 0.00]
+00:19:11.093715 db@open opening
+00:19:11.093780 journal@recovery F·1
+00:19:11.093809 journal@recovery recovering @30
+00:19:11.095093 memdb@flush created L0@32 N·1 S·464B "\x17c\xb3b,v114":"\x17c\xb3b,v114"
+00:19:11.095222 version@stat F·[2 1] S·20KiB[868B 19KiB] Sc·[0.50 0.00]
+00:19:11.098895 db@janitor F·5 G·0
+00:19:11.098921 db@open done T·5.197394ms
+=============== Jul 22, 2023 (CST) ===============
+16:25:18.219649 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+16:25:18.220198 version@stat F·[2 1] S·20KiB[868B 19KiB] Sc·[0.50 0.00]
+16:25:18.220247 db@open opening
+16:25:18.220375 journal@recovery F·1
+16:25:18.220446 journal@recovery recovering @33
+16:25:18.221962 memdb@flush created L0@35 N·7 S·1KiB "&)R\xe9,v118":"\xfe\x00\x16W,v117"
+16:25:18.222149 version@stat F·[3 1] S·21KiB[2KiB 19KiB] Sc·[0.75 0.00]
+16:25:18.226754 db@janitor F·6 G·0
+16:25:18.226775 db@open done T·6.516118ms
+=============== Jul 22, 2023 (CST) ===============
+17:10:33.122085 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+17:10:33.122364 version@stat F·[3 1] S·21KiB[2KiB 19KiB] Sc·[0.75 0.00]
+17:10:33.122405 db@open opening
+17:10:33.122509 journal@recovery F·1
+17:10:33.122556 journal@recovery recovering @36
+17:10:33.123986 memdb@flush created L0@38 N·32 S·4KiB "\b\xd7,\r,v139":"\xff\xc2|`,v127"
+17:10:33.124137 version@stat F·[4 1] S·26KiB[6KiB 19KiB] Sc·[1.00 0.00]
+17:10:33.128375 db@janitor F·7 G·0
+17:10:33.128409 db@open done T·5.988148ms
+17:10:33.128508 table@compaction L0·4 -> L1·1 S·26KiB Q·156
+17:10:33.132682 table@build created L1@41 N·135 S·24KiB "\x01#<\xb0,v30":"\xff\xc2|`,v127"
+17:10:33.132740 version@stat F·[0 1] S·24KiB[0B 24KiB] Sc·[0.00 0.00]
+17:10:33.133553 table@compaction committed F-4 S-1KiB Ke·0 D·8 T·4.990797ms
+17:10:33.133700 table@remove removed @35
+17:10:33.133763 table@remove removed @32
+17:10:33.133812 table@remove removed @29
+17:10:33.133858 table@remove removed @28

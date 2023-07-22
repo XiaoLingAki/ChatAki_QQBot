@@ -2,14 +2,14 @@ import openai
 import time
 import requests
 
-openai.api_key = "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"
+openai.api_key = "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"
 # openai.api_key = "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"  # OpenAI高级会员
 
 
 def chatgpt_pro(history):
 
-    # url = "https://api.openai-proxy.com/v1/chat/completions"
-    url = "https://api.openai.com/v1/chat/completions"
+    url = "https://api.openai-proxy.com/v1/chat/completions"
+    # url = "https://api.openai.com/v1/chat/completions"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {openai.api_key}"
