@@ -1,9 +1,6 @@
 import openai
-import time
 import requests
-
-openai.api_key = "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"
-# openai.api_key = "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"  # OpenAI高级会员
+import os
 
 
 def chatgpt_pro(history):

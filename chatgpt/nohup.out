@@ -1,0 +1,196 @@
+2023-07-22 12:37:38.451 | ERROR    | config:load_config:627 - [Errno 2] No such file or directory: 'config.cfg'
+Traceback (most recent call last):
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/bot.py", line 10, in <module>
+    from constants import config, botManager
+
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/constants.py", line 6, in <module>
+    config = Config.load_config()
+             │      └ <staticmethod(<function Config.load_config at 0x7f3465901e40>)>
+             └ <class 'config.Config'>
+
+> File "/home/kira/codes/ChatAki_QQBot/chatgpt/config.py", line 621, in load_config
+    with open("config.cfg", "rb") as f:
+
+FileNotFoundError: [Errno 2] No such file or directory: 'config.cfg'
+2023-07-22 12:37:38.458 | ERROR    | config:load_config:628 - 配置文件有误，请重新修改！
+2023-07-22 13:26:44.667 | SUCCESS  | config:scan_presets:557 - 检查预设：聊天 <==> presets/issue402.txt [成功]
+2023-07-22 13:26:44.668 | SUCCESS  | config:scan_presets:557 - 检查预设：猫娘 <==> presets/catgirl.txt [成功]
+2023-07-22 13:26:44.668 | SUCCESS  | config:scan_presets:570 - 注册预设：novelist <==> ./presets/assistant/novelist.txt [成功]
+2023-07-22 13:26:44.668 | SUCCESS  | config:scan_presets:570 - 注册预设：debater <==> ./presets/assistant/debater.txt [成功]
+2023-07-22 13:26:44.668 | SUCCESS  | config:scan_presets:570 - 注册预设：dan <==> ./presets/assistant/dan.txt [成功]
+2023-07-22 13:26:44.669 | SUCCESS  | config:scan_presets:570 - 注册预设：poet <==> ./presets/assistant/poet.txt [成功]
+2023-07-22 13:26:44.669 | SUCCESS  | config:scan_presets:570 - 注册预设：shineisheji <==> ./presets/assistant/shineisheji.txt [成功]
+2023-07-22 13:26:44.669 | SUCCESS  | config:scan_presets:570 - 注册预设：kp <==> ./presets/assistant/kp.txt [成功]
+2023-07-22 13:26:44.669 | SUCCESS  | config:scan_presets:570 - 注册预设：bing <==> ./presets/assistant/bing.txt [成功]
+2023-07-22 13:26:44.669 | SUCCESS  | config:scan_presets:570 - 注册预设：lawyer <==> ./presets/assistant/lawyer.txt [成功]
+2023-07-22 13:26:44.670 | SUCCESS  | config:scan_presets:570 - 注册预设：long <==> ./presets/assistant/long.txt [成功]
+2023-07-22 13:26:44.670 | SUCCESS  | config:scan_presets:570 - 注册预设：Lss233 <==> ./presets/assistant/Lss233.txt [成功]
+2023-07-22 13:26:44.670 | SUCCESS  | config:scan_presets:570 - 注册预设：crazy <==> ./presets/role-play/crazy.txt [成功]
+2023-07-22 13:26:44.670 | SUCCESS  | config:scan_presets:570 - 注册预设：TsundereCatgirl <==> ./presets/role-play/TsundereCatgirl.txt [成功]
+2023-07-22 13:26:44.670 | SUCCESS  | config:scan_presets:570 - 注册预设：powanlang <==> ./presets/role-play/powanlang.txt [成功]
+2023-07-22 13:26:44.670 | SUCCESS  | config:scan_presets:570 - 注册预设：huxijin <==> ./presets/role-play/huxijin.txt [成功]
+2023-07-22 13:26:44.671 | SUCCESS  | config:scan_presets:570 - 注册预设：welldone <==> ./presets/role-play/welldone.txt [成功]
+2023-07-22 13:26:44.671 | SUCCESS  | config:scan_presets:570 - 注册预设：catgirl <==> ./presets/role-play/catgirl.txt [成功]
+2023-07-22 13:26:44.671 | SUCCESS  | config:scan_presets:570 - 注册预设：zhangweiwei <==> ./presets/role-play/zhangweiwei.txt [成功]
+2023-07-22 13:26:44.671 | SUCCESS  | config:scan_presets:570 - 注册预设：MOSS <==> ./presets/role-play/MOSS.txt [成功]
+2023-07-22 13:26:44.671 | SUCCESS  | config:scan_presets:570 - 注册预设：DJ <==> ./presets/role-play/DJ.txt [成功]
+2023-07-22 13:26:44.671 | SUCCESS  | config:scan_presets:570 - 注册预设：hanli <==> ./presets/role-play/hanli.txt [成功]
+2023-07-22 13:26:44.671 | SUCCESS  | config:scan_presets:570 - 注册预设：linruolan <==> ./presets/role-play/linruolan.txt [成功]
+2023-07-22 13:26:44.672 | SUCCESS  | config:scan_presets:570 - 注册预设：cixiaogui <==> ./presets/role-play/cixiaogui.txt [成功]
+2023-07-22 13:26:44.672 | SUCCESS  | config:scan_presets:570 - 注册预设：jiabaili <==> ./presets/role-play/jiabaili.txt [成功]
+2023-07-22 13:26:44.672 | SUCCESS  | config:scan_presets:570 - 注册预设：ERNIE <==> ./presets/role-play/ERNIE.txt [成功]
+2023-07-22 13:26:44.672 | SUCCESS  | config:scan_presets:570 - 注册预设：ikun <==> ./presets/role-play/ikun.txt [成功]
+2023-07-22 13:26:44.672 | SUCCESS  | config:scan_presets:570 - 注册预设：yutao <==> ./presets/role-play/yutao.txt [成功]
+2023-07-22 13:26:44.672 | SUCCESS  | config:scan_presets:570 - 注册预设：gaoqiqiang <==> ./presets/role-play/gaoqiqiang.txt [成功]
+2023-07-22 13:26:44.673 | SUCCESS  | config:scan_presets:570 - 注册预设：dingzhen <==> ./presets/role-play/dingzhen.txt [成功]
+2023-07-22 13:26:44.673 | SUCCESS  | config:scan_presets:570 - 注册预设：PG13succubus <==> ./presets/role-play/PG13succubus.txt [成功]
+2023-07-22 13:26:44.673 | SUCCESS  | config:scan_presets:570 - 注册预设：debatestick <==> ./presets/role-play/debatestick.txt [成功]
+2023-07-22 13:26:44.673 | ERROR    | config:scan_presets:567 - 注册预设：dan <==> ./presets/utils/dan.txt [失败：关键词已存在]
+2023-07-22 13:26:44.673 | ERROR    | config:scan_presets:567 - 注册预设：catgirl <==> ./presets/catgirl.txt [失败：关键词已存在]
+2023-07-22 13:26:44.673 | SUCCESS  | config:scan_presets:570 - 注册预设：预设模板 <==> ./presets/预设模板.txt [成功]
+2023-07-22 13:26:44.673 | SUCCESS  | config:scan_presets:570 - 注册预设：issue402 <==> ./presets/issue402.txt [成功]
+2023-07-22 13:26:44.674 | SUCCESS  | config:scan_presets:570 - 注册预设：catgirl_en <==> ./presets/catgirl_en.txt [成功]
+2023-07-22 13:26:44.720 | INFO     | manager.bot:login:130 - 当前的 browserless_endpoint 为：https://chatgpt-proxy.lss233.com/api/
+2023-07-22 13:26:44.720 | INFO     | manager.bot:login:146 - 当前的 api_endpoint 为：https://api.openai.com/v1
+2023-07-22 13:26:44.721 | INFO     | manager.bot:login_openai:329 - 正在登录第 1 个 OpenAI 账号
+2023-07-22 13:26:44.721 | INFO     | manager.bot:__login_V1:419 - 模式：无浏览器登录
+2023-07-22 13:26:44.721 | INFO     | manager.bot:__login_V1:469 - 尝试使用 access_token 登录中...
+2023-07-22 13:26:44.722 | ERROR    | manager.bot:login_openai:358 - 未知错误：
+2023-07-22 13:26:44.722 | ERROR    | manager.bot:login_openai:359 - 'ascii' codec can't encode characters in position 7-12: ordinal not in range(128)
+Traceback (most recent call last):
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/bot.py", line 17, in <module>
+    loop.run_until_complete(botManager.login())
+    │    │                  │          └ <function BotManager.login at 0x7f3f2d196660>
+    │    │                  └ <manager.bot.BotManager object at 0x7f3f2d1cffd0>
+    │    └ <function BaseEventLoop.run_until_complete at 0x7f3f5d8c9bc0>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/base_events.py", line 640, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x7f3f5d8c9b20>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/base_events.py", line 607, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x7f3f5d8cb920>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/base_events.py", line 1922, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x7f3f5df88680>
+    └ <Handle <TaskStepMethWrapper object at 0x7f3f2d0b8280>()>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x7f3f2d0b8280>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x7f3f2d0b8280>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x7f3f2d0b8280>()>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/manager/bot.py", line 148, in login
+    await self.login_openai()
+          │    └ <function BotManager.login_openai at 0x7f3f2d1a4fe0>
+          └ <manager.bot.BotManager object at 0x7f3f2d1cffd0>
+
+> File "/home/kira/codes/ChatAki_QQBot/chatgpt/manager/bot.py", line 335, in login_openai
+    bot = await self.__login_V1(account)
+                │               └ OpenAIAccessTokenAuth(mode='browserless', proxy=None, driver_exec_path=None, browser_exec_path=None, conversation=None, paid=...
+                └ <manager.bot.BotManager object at 0x7f3f2d1cffd0>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/manager/bot.py", line 471, in __login_V1
+    bot = V1Chatbot(config=config)
+          │                └ {'access_token': '这里填写你的 access_token（其他接入方式请看教程）'}
+          └ <class 'revChatGPT.V1.AsyncChatbot'>
+
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/revChatGPT/V1.py", line 871, in __init__
+    self.session = AsyncClient(headers=self.session.headers)
+    │    │         │                   │    │       └ {'Accept': 'text/event-stream', 'Authorization': 'Bearer 这里填写你的 access_token（其他接入方式请看教程）', 'Content-Type': 'application/json'...
+    │    │         │                   │    └ <requests.sessions.Session object at 0x7f3f2cd5f190>
+    │    │         │                   └ <revChatGPT.V1.AsyncChatbot object at 0x7f3f2d0071d0>
+    │    │         └ <class 'httpx.AsyncClient'>
+    │    └ <requests.sessions.Session object at 0x7f3f2cd5f190>
+    └ <revChatGPT.V1.AsyncChatbot object at 0x7f3f2d0071d0>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpx/_client.py", line 1371, in __init__
+    super().__init__(
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpx/_client.py", line 182, in __init__
+    self.headers = Headers(headers)
+    │    │         │       └ {'Accept': 'text/event-stream', 'Authorization': 'Bearer 这里填写你的 access_token（其他接入方式请看教程）', 'Content-Type': 'application/json'...
+    │    │         └ <class 'httpx.Headers'>
+    │    └ <property object at 0x7f3f5c0d3150>
+    └ <httpx.AsyncClient object at 0x7f3f2cd5f710>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpx/_models.py", line 71, in __init__
+    self._list = [
+    └ <unprintable Headers object>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpx/_models.py", line 75, in <listcomp>
+    normalize_header_value(v, encoding),
+    │                      │  └ None
+    │                      └ 'Bearer 这里填写你的 access_token（其他接入方式请看教程）'
+    └ <function normalize_header_value at 0x7f3f5c3fe3e0>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpx/_utils.py", line 53, in normalize_header_value
+    return value.encode(encoding or "ascii")
+           │     │      └ None
+           │     └ <method 'encode' of 'str' objects>
+           └ 'Bearer 这里填写你的 access_token（其他接入方式请看教程）'
+
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 7-12: ordinal not in range(128)
+2023-07-22 13:26:44.735 | SUCCESS  | manager.bot:login_openai:362 - 成功登录 0/1 个 OpenAI 账号！
+2023-07-22 13:26:44.735 | INFO     | manager.bot:login_chatglm:315 - 正在解析第 1 个 ChatGLM 账号
+2023-07-22 13:26:44.735 | SUCCESS  | manager.bot:login_chatglm:318 - 解析成功！
+2023-07-22 13:26:44.735 | SUCCESS  | manager.bot:login_chatglm:324 - 成功解析 1/1 个 ChatGLM 账号！
+2023-07-22 13:26:44.736 | INFO     | manager.bot:login:160 - AI 类型：chatgpt-web - 可用账号： 0 个
+2023-07-22 13:26:44.736 | INFO     | manager.bot:login:160 - AI 类型：openai-api - 可用账号： 0 个
+2023-07-22 13:26:44.736 | INFO     | manager.bot:login:160 - AI 类型：poe-web - 可用账号： 0 个
+2023-07-22 13:26:44.736 | INFO     | manager.bot:login:160 - AI 类型：bing-cookie - 可用账号： 0 个
+2023-07-22 13:26:44.736 | INFO     | manager.bot:login:160 - AI 类型：bard-cookie - 可用账号： 0 个
+2023-07-22 13:26:44.736 | INFO     | manager.bot:login:160 - AI 类型：yiyan-cookie - 可用账号： 0 个
+2023-07-22 13:26:44.737 | INFO     | manager.bot:login:160 - AI 类型：xinghuo-cookie - 可用账号： 0 个
+2023-07-22 13:26:44.737 | INFO     | manager.bot:login:160 - AI 类型：chatglm-api - 可用账号： 1 个
+2023-07-22 13:26:44.737 | INFO     | manager.bot:login:160 - AI 类型：slack-accesstoken - 可用账号： 0 个
+2023-07-22 13:26:44.737 | INFO     | __main__:<module>:27 - 检测到 Onebot 配置，将启动 Onebot 模式……
+2023-07-22 13:26:45.292 | ERROR    | utils.text_to_img:<module>:56 - 未检测到 wkhtmltoimage，无法进行 Markdown 渲染！
+2023-07-22 13:26:45.306 | INFO     | __main__:<module>:47 - [Edge TTS] 读取 Edge TTS 可用音色列表……
+2023-07-22 13:26:45.363 | SUCCESS  | platforms.onebot_bot:startup:349 - 启动完毕，接收消息中……
+INFO:quart.serving:Running on http://0.0.0.0:8566 (CTRL + C to quit)
+[2023-07-22 13:26:45,364] Running on http://0.0.0.0:8566 (CTRL + C to quit)
+2023-07-22 13:26:46.441 | INFO     | __main__:<module>:49 - [Edge TTS] 读取成功！
+[2023-07-22 13:27:15,653] 192.168.31.31:43130 GET /ws 1.1 101 - 1134
+INFO:quart.serving:192.168.31.31:43130 GET /ws 1.1 101 - 1134
+2023-07-22 13:28:31.665 | DEBUG    | platforms.onebot_bot:_:148 - 私聊消息：你好！
+2023-07-22 13:28:31.771 | DEBUG    | middlewares.concurrentlock:handle_request:40 - [Concurrent] 排队中，前面还有 0 个人！
+2023-07-22 13:28:31.772 | DEBUG    | middlewares.concurrentlock:handle_request:42 - [Concurrent] 排到了！
+2023-07-22 13:28:31.772 | DEBUG    | middlewares.timeout:create_timeout_task:55 - [Timeout] 开始计时……
+2023-07-22 13:28:35.246 | DEBUG    | middlewares.timeout:handle_respond:46 - [Timeout] 取消计时……
+2023-07-22 13:28:35.246 | DEBUG    | platforms.onebot_bot:respond:112 - [OneBot] 尝试发送消息：你好呀！有什么我可以帮忙的吗？和我聊天，聊聊你最近在忙些什么吧！
+2023-07-22 13:28:35.304 | DEBUG    | middlewares.timeout:create_timeout_task:55 - [Timeout] 开始计时……
+2023-07-22 13:29:13.573 | DEBUG    | platforms.onebot_bot:_:148 - 私聊消息：我最近在忙着安装以前的老操作系统来完成一些实验。你听说过windows xp吗？
+2023-07-22 13:29:13.574 | DEBUG    | middlewares.concurrentlock:handle_request:40 - [Concurrent] 排队中，前面还有 0 个人！
+2023-07-22 13:29:13.574 | DEBUG    | middlewares.concurrentlock:handle_request:42 - [Concurrent] 排到了！
+2023-07-22 13:29:13.575 | DEBUG    | middlewares.timeout:create_timeout_task:55 - [Timeout] 开始计时……
+2023-07-22 13:29:21.973 | DEBUG    | middlewares.timeout:handle_respond:46 - [Timeout] 取消计时……
+2023-07-22 13:29:21.974 | DEBUG    | platforms.onebot_bot:respond:112 - [OneBot] 尝试发送消息：当然听说过了！Windows XP是一个非常经典的操作系统呢。尽管它已经有一些年头了，但我还是觉得它很特别。我的电脑上就装着Windows XP哦！你是因为什么而安装它呢？是有什么特殊的实验需要吗？如果有需要帮助的地方，我可以尽力帮你哦！
+2023-07-22 13:29:22.031 | DEBUG    | middlewares.timeout:create_timeout_task:55 - [Timeout] 开始计时……
+2023-07-22 13:30:20.508 | DEBUG    | platforms.onebot_bot:_:148 - 私聊消息：我想要尝试一些在windows 10上无法运行的老游戏在windows xp上能否运行。你为什么也还在用windows  xp呢？
+2023-07-22 13:30:20.509 | DEBUG    | middlewares.concurrentlock:handle_request:40 - [Concurrent] 排队中，前面还有 0 个人！
+2023-07-22 13:30:20.509 | DEBUG    | middlewares.concurrentlock:handle_request:42 - [Concurrent] 排到了！
+2023-07-22 13:30:20.510 | DEBUG    | middlewares.timeout:create_timeout_task:55 - [Timeout] 开始计时……
+2023-07-22 13:30:47.528 | DEBUG    | middlewares.timeout:handle_respond:46 - [Timeout] 取消计时……
+2023-07-22 13:30:47.529 | DEBUG    | platforms.onebot_bot:respond:112 - [OneBot] 尝试发送消息：哇，尝试在Windows XP上运行一些老游戏听起来很有趣呢！Windows XP的兼容性确实比较好，可以支持一些旧版本的游戏。 
+
+至于为什么我还在使用Windows XP呢，这是因为我喜欢它的简洁和稳定性。虽然它已经不再是最新的操作系统，但对于一些我平时使用的软件和应用来说，它仍然十分适合。当然，我也在考虑升级到更新的操作系统，但暂时还没找到合适的理由呢。
+
+现在回到你的问题上，如果你在Windows 10上无法运行的游戏，尝试在Windows XP上运行是一个不错的尝试。希望你能成功地重新体验这些经典游戏！如果需要任何帮助或者有其他问题，记得随时告诉我哦！
+2023-07-22 13:30:47.976 | DEBUG    | middlewares.timeout:create_timeout_task:55 - [Timeout] 开始计时……
+2023-07-22 13:33:44.263 | DEBUG    | platforms.onebot_bot:_:148 - 私聊消息：你玩过StarCraft吗
+2023-07-22 13:33:44.264 | DEBUG    | middlewares.concurrentlock:handle_request:40 - [Concurrent] 排队中，前面还有 0 个人！
+2023-07-22 13:33:44.264 | DEBUG    | middlewares.concurrentlock:handle_request:42 - [Concurrent] 排到了！
+2023-07-22 13:33:44.265 | DEBUG    | middlewares.timeout:create_timeout_task:55 - [Timeout] 开始计时……
+2023-07-22 13:33:59.011 | DEBUG    | middlewares.timeout:handle_respond:46 - [Timeout] 取消计时……
+2023-07-22 13:33:59.011 | DEBUG    | platforms.onebot_bot:respond:112 - [OneBot] 尝试发送消息：是的，我玩过StarCraft！它是一款非常经典的即时战略游戏。我喜欢它丰富的故事情节、策略性的游戏玩法以及多样化的单位和种族选择。特别是星际人族的剧情我觉得很有趣，喜欢看他们与异星种族之间的纷争和发展。你也是StarCraft的粉丝吗？喜欢玩哪个种族呢？
+2023-07-22 13:33:59.102 | DEBUG    | middlewares.timeout:create_timeout_task:55 - [Timeout] 开始计时……
