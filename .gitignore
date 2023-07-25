@@ -171,3 +171,4 @@ venv/
 *.out
 /chatgpt/nohup.out
 /chatgpt/data/
+/go-cqhttp/data/
