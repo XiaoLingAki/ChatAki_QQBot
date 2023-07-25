@@ -76,7 +76,11 @@ async def create_item(request: Request):
         notice = "(输入字符数超过3000，截断后面的输入)"
         
     
-    response = notice + response_create(prompt)
+    response = response_create(prompt)
+    if response is None:
+        response = "粉毛被撅晕了！正在抢修中，请坐下和放宽~"
+    response = notice + response
+
     # response = "只要看到这个就说明能接收消息"
     history = []
     # response, history = model.chat(tokenizer,

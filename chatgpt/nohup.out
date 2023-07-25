@@ -5869,3 +5869,430 @@ aiocqhttp.exceptions.ActionFailed: <ActionFailed data=None, echo={'seq': 227}, m
 2023-07-25 09:48:15.723 | WARNING  | platforms.onebot_bot:respond:122 - 原始消息发送失败，尝试通过转发发送
 2023-07-25 09:48:16.488 | DEBUG    | middlewares.timeout:on_respond:40 - [Timeout] 取消计时……
 2023-07-25 09:48:16.489 | DEBUG    | middlewares.timeout:create_timeout_task:58 - [Timeout] 等待过久，发送提示
+2023-07-25 10:00:58.742 | DEBUG    | platforms.onebot_bot:_:178 - 丢弃群聊消息：[CQ:image,file=2ce2caf1214c5a694231f2b16b86b237.image,subType=1,url=https://gchat.qpic.cn/gchatpic_new/767206840/3812763301-2389136660-2CE2CAF1214C5A694231F2B16B86B237/0?term=2&amp;is_origin=0]（原因：不符合触发前缀）
+2023-07-25 10:01:54.926 | DEBUG    | platforms.onebot_bot:_:148 - 私聊消息：你在哪里
+2023-07-25 10:01:55.039 | DEBUG    | middlewares.concurrentlock:handle_request:40 - [Concurrent] 排队中，前面还有 0 个人！
+2023-07-25 10:01:55.039 | DEBUG    | middlewares.concurrentlock:handle_request:42 - [Concurrent] 排到了！
+2023-07-25 10:01:55.067 | DEBUG    | middlewares.timeout:create_timeout_task:55 - [Timeout] 开始计时……
+2023-07-25 10:01:55.974 | ERROR    | universal:handle_message:295 - Server error '500 Internal Server Error' for url 'http://192.168.31.117:8000'
+For more information check: https://httpstatuses.com/500
+Traceback (most recent call last):
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/bot.py", line 54, in <module>
+    loop.run_until_complete(asyncio.gather(*bots))
+    │    │                  │       │       └ [<Task pending name='Task-2' coro=<start_task() running at /home/kira/codes/ChatAki_QQBot/chatgpt/platforms/onebot_bot.py:356...
+    │    │                  │       └ <function gather at 0x7fcc1febcd60>
+    │    │                  └ <module 'asyncio' from '/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/__init__.py'>
+    │    └ <function BaseEventLoop.run_until_complete at 0x7fcc1fecdbc0>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/base_events.py", line 640, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x7fcc1fecdb20>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/base_events.py", line 607, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x7fcc1fecf920>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/base_events.py", line 1922, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x7fcc2058c680>
+    └ <Handle Task.task_wakeup(<Future finished result=None>)>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle Task.task_wakeup(<Future finished result=None>)>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle Task.task_wakeup(<Future finished result=None>)>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle Task.task_wakeup(<Future finished result=None>)>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/platforms/onebot_bot.py", line 151, in _
+    await handle_message(
+          └ <function handle_message at 0x7fcbe8c7f7e0>
+
+> File "/home/kira/codes/ChatAki_QQBot/chatgpt/universal.py", line 269, in handle_message
+    await action(session_id, message.strip(), conversation_context, respond)
+          │      │           │       │        │                     └ <function handle_message.<locals>.respond at 0x7fcbd37b28e0>
+          │      │           │       │        └ None
+          │      │           │       └ <method 'strip' of 'str' objects>
+          │      │           └ '你在哪里'
+          │      └ 'friend-1736580842'
+          └ <function handle_message.<locals>.wrap_request.<locals>.call at 0x7fcbd37b1da0>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/universal.py", line 53, in call
+    await m.handle_request(session_id, message, respond, conversation_context, n)
+          │ │              │           │        │        │                     └ <function handle_message.<locals>.wrap_request.<locals>.call at 0x7fcbd37b1c60>
+          │ │              │           │        │        └ None
+          │ │              │           │        └ <function handle_message.<locals>.respond at 0x7fcbd37b28e0>
+          │ │              │           └ '你在哪里'
+          │ │              └ 'friend-1736580842'
+          │ └ <function MiddlewareConcurrentLock.handle_request at 0x7fcbe8ca9c60>
+          └ <middlewares.concurrentlock.MiddlewareConcurrentLock object at 0x7fcbe8c9db50>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/middlewares/concurrentlock.py", line 43, in handle_request
+    await action(session_id, prompt, conversation_context, respond)
+          │      │           │       │                     └ <function handle_message.<locals>.respond at 0x7fcbd37b28e0>
+          │      │           │       └ None
+          │      │           └ '你在哪里'
+          │      └ 'friend-1736580842'
+          └ <function handle_message.<locals>.wrap_request.<locals>.call at 0x7fcbd37b1c60>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/universal.py", line 53, in call
+    await m.handle_request(session_id, message, respond, conversation_context, n)
+          │ │              │           │        │        │                     └ <function handle_message.<locals>.wrap_request.<locals>.call at 0x7fcbd37b2160>
+          │ │              │           │        │        └ None
+          │ │              │           │        └ <function handle_message.<locals>.respond at 0x7fcbd37b28e0>
+          │ │              │           └ '你在哪里'
+          │ │              └ 'friend-1736580842'
+          │ └ <function Middleware.handle_request at 0x7fcbe8ca8ea0>
+          └ <middlewares.baiducloud.MiddlewareBaiduCloud object at 0x7fcbe8c9ded0>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/middlewares/middleware.py", line 9, in handle_request
+    await action(session_id, prompt, conversation_context, respond)
+          │      │           │       │                     └ <function handle_message.<locals>.respond at 0x7fcbd37b28e0>
+          │      │           │       └ None
+          │      │           └ '你在哪里'
+          │      └ 'friend-1736580842'
+          └ <function handle_message.<locals>.wrap_request.<locals>.call at 0x7fcbd37b2160>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/universal.py", line 53, in call
+    await m.handle_request(session_id, message, respond, conversation_context, n)
+          │ │              │           │        │        │                     └ <function handle_message.<locals>.wrap_request.<locals>.call at 0x7fcbd37b16c0>
+          │ │              │           │        │        └ None
+          │ │              │           │        └ <function handle_message.<locals>.respond at 0x7fcbd37b28e0>
+          │ │              │           └ '你在哪里'
+          │ │              └ 'friend-1736580842'
+          │ └ <function MiddlewareRatelimit.handle_request at 0x7fcbe8ca9120>
+          └ <middlewares.ratelimit.MiddlewareRatelimit object at 0x7fcbe8c9db10>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/middlewares/ratelimit.py", line 23, in handle_request
+    await action(session_id, prompt, conversation_context, respond)
+          │      │           │       │                     └ <function handle_message.<locals>.respond at 0x7fcbd37b28e0>
+          │      │           │       └ None
+          │      │           └ '你在哪里'
+          │      └ 'friend-1736580842'
+          └ <function handle_message.<locals>.wrap_request.<locals>.call at 0x7fcbd37b16c0>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/universal.py", line 53, in call
+    await m.handle_request(session_id, message, respond, conversation_context, n)
+          │ │              │           │        │        │                     └ <function handle_message.<locals>.request at 0x7fcbd37b2660>
+          │ │              │           │        │        └ None
+          │ │              │           │        └ <function handle_message.<locals>.respond at 0x7fcbd37b28e0>
+          │ │              │           └ '你在哪里'
+          │ │              └ 'friend-1736580842'
+          │ └ <function MiddlewareTimeout.handle_request at 0x7fcbe8ca9da0>
+          └ <middlewares.timeout.MiddlewareTimeout object at 0x7fcbe8c9de50>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/middlewares/timeout.py", line 27, in handle_request
+    await asyncio.wait_for(coro_task, config.response.max_timeout)
+          │       │        │          │      │        └ 600.0
+          │       │        │          │      └ Response(mode='text', buffer_delay=15.0, default_ai='chatglm-api', error_format='出现故障！如果这个问题持续出现，请和我说“重置会话” 来开启一段新的会话，或者发送 “回...
+          │       │        │          └ Config(onebot=Onebot(manager_qq=1109147357, reverse_ws_host='0.0.0.0', reverse_ws_port=8566), mirai=None, telegram=None, disc...
+          │       │        └ <Task finished name='Task-43928' coro=<handle_message.<locals>.request() done, defined at /home/kira/codes/ChatAki_QQBot/chat...
+          │       └ <function wait_for at 0x7fcc1febc7c0>
+          └ <module 'asyncio' from '/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/__init__.py'>
+
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/tasks.py", line 479, in wait_for
+    return fut.result()
+           │   └ <method 'result' of '_asyncio.Task' objects>
+           └ <Task finished name='Task-43928' coro=<handle_message.<locals>.request() done, defined at /home/kira/codes/ChatAki_QQBot/chat...
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/universal.py", line 222, in request
+    async for rendered in task:
+                          └ <async_generator object retry.<locals>.decorator.<locals>.wrapper at 0x7fcbe8fe6050>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/utils/retry.py", line 21, in wrapper
+    async for result in func(*args, **kwargs):
+                        │     │       └ {'prompt': '你在哪里', 'chain': MessageChain([Plain(text='你在哪里')]), 'name': 'XYZ'}
+                        │     └ (<conversation.ConversationContext object at 0x7fcbe8cfcf50>,)
+                        └ <function ConversationContext.ask at 0x7fcbe8ca8720>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/conversation.py", line 195, in ask
+    async for item in self.adapter.ask(prompt):
+                      │    │       │   └ '你在哪里'
+                      │    │       └ <function ChatGLM6BAdapter.ask at 0x7fcbe8f251c0>
+                      │    └ <adapter.thudm.chatglm_6b.ChatGLM6BAdapter object at 0x7fcbd3729250>
+                      └ <conversation.ConversationContext object at 0x7fcbe8cfcf50>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/adapter/thudm/chatglm_6b.py", line 35, in ask
+    response.raise_for_status()
+    │        └ <function Response.raise_for_status at 0x7fcc1ea43a60>
+    └ <Response [500 Internal Server Error]>
+
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpx/_models.py", line 749, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+          │               │                │                 └ <Response [500 Internal Server Error]>
+          │               │                └ <Request('POST', 'http://192.168.31.117:8000')>
+          │               └ "Server error '500 Internal Server Error' for url 'http://192.168.31.117:8000'\nFor more information check: https://httpstatu...
+          └ <class 'httpx.HTTPStatusError'>
+
+httpx.HTTPStatusError: Server error '500 Internal Server Error' for url 'http://192.168.31.117:8000'
+For more information check: https://httpstatuses.com/500
+2023-07-25 10:01:55.999 | DEBUG    | platforms.onebot_bot:respond:112 - [OneBot] 尝试发送消息：出现故障！如果这个问题持续出现，请和我说“重置会话” 来开启一段新的会话，或者发送 “回滚会话” 来回溯到上一条对话，你上一条说的我就当作没看见。
+Server error '500 Internal Server Error' for url 'http://192.168.31.117:8000'
+For more information check: https://httpstatuses.com/500
+2023-07-25 10:02:25.073 | DEBUG    | platforms.onebot_bot:respond:112 - [OneBot] 尝试发送消息：我还在思考中，请再等一下~
+2023-07-25 10:02:25.080 | DEBUG    | middlewares.timeout:on_respond:40 - [Timeout] 取消计时……
+2023-07-25 10:02:25.081 | DEBUG    | middlewares.timeout:create_timeout_task:58 - [Timeout] 等待过久，发送提示
+2023-07-25 10:04:44.135 | DEBUG    | platforms.onebot_bot:_:148 - 私聊消息：1
+2023-07-25 10:04:44.136 | DEBUG    | middlewares.concurrentlock:handle_request:40 - [Concurrent] 排队中，前面还有 0 个人！
+2023-07-25 10:04:44.137 | DEBUG    | middlewares.concurrentlock:handle_request:42 - [Concurrent] 排到了！
+2023-07-25 10:04:44.181 | DEBUG    | middlewares.timeout:create_timeout_task:55 - [Timeout] 开始计时……
+2023-07-25 10:04:45.007 | DEBUG    | middlewares.timeout:handle_respond:46 - [Timeout] 取消计时……
+2023-07-25 10:04:45.008 | DEBUG    | platforms.onebot_bot:respond:112 - [OneBot] 尝试发送消息：Default response
+2023-07-25 10:04:45.033 | DEBUG    | middlewares.timeout:create_timeout_task:55 - [Timeout] 开始计时……
+2023-07-25 10:11:00.981 | DEBUG    | platforms.onebot_bot:_:148 - 私聊消息：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
+2023-07-25 10:11:00.982 | DEBUG    | middlewares.concurrentlock:handle_request:40 - [Concurrent] 排队中，前面还有 0 个人！
+2023-07-25 10:11:00.983 | DEBUG    | middlewares.concurrentlock:handle_request:42 - [Concurrent] 排到了！
+2023-07-25 10:11:00.984 | DEBUG    | middlewares.timeout:create_timeout_task:55 - [Timeout] 开始计时……
+2023-07-25 10:11:30.986 | DEBUG    | platforms.onebot_bot:respond:112 - [OneBot] 尝试发送消息：我还在思考中，请再等一下~
+2023-07-25 10:11:30.992 | DEBUG    | middlewares.timeout:on_respond:40 - [Timeout] 取消计时……
+2023-07-25 10:11:30.993 | DEBUG    | middlewares.timeout:create_timeout_task:58 - [Timeout] 等待过久，发送提示
+2023-07-25 10:14:16.338 | ERROR    | universal:handle_message:295 - Server disconnected without sending a response.
+Traceback (most recent call last):
+
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpx/_transports/default.py", line 60, in map_httpcore_exceptions
+    yield
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpx/_transports/default.py", line 353, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+                 │    │     │                    └ <Request [b'POST']>
+                 │    │     └ <function AsyncConnectionPool.handle_async_request at 0x7fcc1e6bdb20>
+                 │    └ <httpcore.AsyncConnectionPool object at 0x7fcbe8d15610>
+                 └ <httpx.AsyncHTTPTransport object at 0x7fcbe8d05cd0>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 262, in handle_async_request
+    raise exc
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 245, in handle_async_request
+    response = await connection.handle_async_request(request)
+                     │          │                    └ <Request [b'POST']>
+                     │          └ <function AsyncHTTPConnection.handle_async_request at 0x7fcc1e6ab560>
+                     └ <AsyncHTTPConnection ['http://192.168.31.117:8000', HTTP/1.1, CLOSED, Request Count: 1]>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpcore/_async/connection.py", line 96, in handle_async_request
+    return await self._connection.handle_async_request(request)
+                 │    │           │                    └ <Request [b'POST']>
+                 │    │           └ <function AsyncHTTP11Connection.handle_async_request at 0x7fcc1e6abec0>
+                 │    └ <AsyncHTTP11Connection ['http://192.168.31.117:8000', CLOSED, Request Count: 1]>
+                 └ <AsyncHTTPConnection ['http://192.168.31.117:8000', HTTP/1.1, CLOSED, Request Count: 1]>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpcore/_async/http11.py", line 121, in handle_async_request
+    raise exc
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpcore/_async/http11.py", line 99, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+              │    │                           └ {'request': <Request [b'POST']>}
+              │    └ <function AsyncHTTP11Connection._receive_response_headers at 0x7fcc1e6bc180>
+              └ <AsyncHTTP11Connection ['http://192.168.31.117:8000', CLOSED, Request Count: 1]>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpcore/_async/http11.py", line 164, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+                  │    │                      └ 360
+                  │    └ <function AsyncHTTP11Connection._receive_event at 0x7fcc1e6bc2c0>
+                  └ <AsyncHTTP11Connection ['http://192.168.31.117:8000', CLOSED, Request Count: 1]>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpcore/_async/http11.py", line 214, in _receive_event
+    raise RemoteProtocolError(msg)
+          │                   └ 'Server disconnected without sending a response.'
+          └ <class 'httpcore.RemoteProtocolError'>
+
+httpcore.RemoteProtocolError: Server disconnected without sending a response.
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/bot.py", line 54, in <module>
+    loop.run_until_complete(asyncio.gather(*bots))
+    │    │                  │       │       └ [<Task pending name='Task-2' coro=<start_task() running at /home/kira/codes/ChatAki_QQBot/chatgpt/platforms/onebot_bot.py:356...
+    │    │                  │       └ <function gather at 0x7fcc1febcd60>
+    │    │                  └ <module 'asyncio' from '/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/__init__.py'>
+    │    └ <function BaseEventLoop.run_until_complete at 0x7fcc1fecdbc0>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/base_events.py", line 640, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x7fcc1fecdb20>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/base_events.py", line 607, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x7fcc1fecf920>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/base_events.py", line 1922, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x7fcc2058c680>
+    └ <Handle Task.task_wakeup(<Future finished result=None>)>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle Task.task_wakeup(<Future finished result=None>)>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle Task.task_wakeup(<Future finished result=None>)>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle Task.task_wakeup(<Future finished result=None>)>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/platforms/onebot_bot.py", line 151, in _
+    await handle_message(
+          └ <function handle_message at 0x7fcbe8c7f7e0>
+
+> File "/home/kira/codes/ChatAki_QQBot/chatgpt/universal.py", line 269, in handle_message
+    await action(session_id, message.strip(), conversation_context, respond)
+          │      │           │       │        │                     └ <function handle_message.<locals>.respond at 0x7fcbd3773560>
+          │      │           │       │        └ <conversation.ConversationContext object at 0x7fcbe97caf90>
+          │      │           │       └ <method 'strip' of 'str' objects>
+          │      │           └ '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'
+          │      └ 'friend-1109147357'
+          └ <function handle_message.<locals>.wrap_request.<locals>.call at 0x7fcbd37b2020>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/universal.py", line 53, in call
+    await m.handle_request(session_id, message, respond, conversation_context, n)
+          │ │              │           │        │        │                     └ <function handle_message.<locals>.wrap_request.<locals>.call at 0x7fcbd37b1d00>
+          │ │              │           │        │        └ None
+          │ │              │           │        └ <function handle_message.<locals>.respond at 0x7fcbd3773560>
+          │ │              │           └ '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'
+          │ │              └ 'friend-1109147357'
+          │ └ <function MiddlewareConcurrentLock.handle_request at 0x7fcbe8ca9c60>
+          └ <middlewares.concurrentlock.MiddlewareConcurrentLock object at 0x7fcbe8c9db50>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/middlewares/concurrentlock.py", line 43, in handle_request
+    await action(session_id, prompt, conversation_context, respond)
+          │      │           │       │                     └ <function handle_message.<locals>.respond at 0x7fcbd3773560>
+          │      │           │       └ None
+          │      │           └ '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'
+          │      └ 'friend-1109147357'
+          └ <function handle_message.<locals>.wrap_request.<locals>.call at 0x7fcbd37b1d00>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/universal.py", line 53, in call
+    await m.handle_request(session_id, message, respond, conversation_context, n)
+          │ │              │           │        │        │                     └ <function handle_message.<locals>.wrap_request.<locals>.call at 0x7fcbd37b2de0>
+          │ │              │           │        │        └ None
+          │ │              │           │        └ <function handle_message.<locals>.respond at 0x7fcbd3773560>
+          │ │              │           └ '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'
+          │ │              └ 'friend-1109147357'
+          │ └ <function Middleware.handle_request at 0x7fcbe8ca8ea0>
+          └ <middlewares.baiducloud.MiddlewareBaiduCloud object at 0x7fcbe8c9ded0>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/middlewares/middleware.py", line 9, in handle_request
+    await action(session_id, prompt, conversation_context, respond)
+          │      │           │       │                     └ <function handle_message.<locals>.respond at 0x7fcbd3773560>
+          │      │           │       └ None
+          │      │           └ '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'
+          │      └ 'friend-1109147357'
+          └ <function handle_message.<locals>.wrap_request.<locals>.call at 0x7fcbd37b2de0>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/universal.py", line 53, in call
+    await m.handle_request(session_id, message, respond, conversation_context, n)
+          │ │              │           │        │        │                     └ <function handle_message.<locals>.wrap_request.<locals>.call at 0x7fcbd37b1f80>
+          │ │              │           │        │        └ None
+          │ │              │           │        └ <function handle_message.<locals>.respond at 0x7fcbd3773560>
+          │ │              │           └ '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'
+          │ │              └ 'friend-1109147357'
+          │ └ <function MiddlewareRatelimit.handle_request at 0x7fcbe8ca9120>
+          └ <middlewares.ratelimit.MiddlewareRatelimit object at 0x7fcbe8c9db10>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/middlewares/ratelimit.py", line 23, in handle_request
+    await action(session_id, prompt, conversation_context, respond)
+          │      │           │       │                     └ <function handle_message.<locals>.respond at 0x7fcbd3773560>
+          │      │           │       └ None
+          │      │           └ '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'
+          │      └ 'friend-1109147357'
+          └ <function handle_message.<locals>.wrap_request.<locals>.call at 0x7fcbd37b1f80>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/universal.py", line 53, in call
+    await m.handle_request(session_id, message, respond, conversation_context, n)
+          │ │              │           │        │        │                     └ <function handle_message.<locals>.request at 0x7fcbd37737e0>
+          │ │              │           │        │        └ None
+          │ │              │           │        └ <function handle_message.<locals>.respond at 0x7fcbd3773560>
+          │ │              │           └ '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'
+          │ │              └ 'friend-1109147357'
+          │ └ <function MiddlewareTimeout.handle_request at 0x7fcbe8ca9da0>
+          └ <middlewares.timeout.MiddlewareTimeout object at 0x7fcbe8c9de50>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/middlewares/timeout.py", line 27, in handle_request
+    await asyncio.wait_for(coro_task, config.response.max_timeout)
+          │       │        │          │      │        └ 600.0
+          │       │        │          │      └ Response(mode='text', buffer_delay=15.0, default_ai='chatglm-api', error_format='出现故障！如果这个问题持续出现，请和我说“重置会话” 来开启一段新的会话，或者发送 “回...
+          │       │        │          └ Config(onebot=Onebot(manager_qq=1109147357, reverse_ws_host='0.0.0.0', reverse_ws_port=8566), mirai=None, telegram=None, disc...
+          │       │        └ <Task finished name='Task-44064' coro=<handle_message.<locals>.request() done, defined at /home/kira/codes/ChatAki_QQBot/chat...
+          │       └ <function wait_for at 0x7fcc1febc7c0>
+          └ <module 'asyncio' from '/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/__init__.py'>
+
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/asyncio/tasks.py", line 479, in wait_for
+    return fut.result()
+           │   └ <method 'result' of '_asyncio.Task' objects>
+           └ <Task finished name='Task-44064' coro=<handle_message.<locals>.request() done, defined at /home/kira/codes/ChatAki_QQBot/chat...
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/universal.py", line 222, in request
+    async for rendered in task:
+                          └ <async_generator object retry.<locals>.decorator.<locals>.wrapper at 0x7fcbe8fe6e90>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/utils/retry.py", line 21, in wrapper
+    async for result in func(*args, **kwargs):
+                        │     │       └ {'prompt': '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', 'chain': MessageChain([Plain(text='sk-Dlf9Gv8rzGWweua1hvxMT...
+                        │     └ (<conversation.ConversationContext object at 0x7fcbe97caf90>,)
+                        └ <function ConversationContext.ask at 0x7fcbe8ca8720>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/conversation.py", line 195, in ask
+    async for item in self.adapter.ask(prompt):
+                      │    │       │   └ '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'
+                      │    │       └ <function ChatGLM6BAdapter.ask at 0x7fcbe8f251c0>
+                      │    └ <adapter.thudm.chatglm_6b.ChatGLM6BAdapter object at 0x7fcbe8cdeb50>
+                      └ <conversation.ConversationContext object at 0x7fcbe97caf90>
+
+  File "/home/kira/codes/ChatAki_QQBot/chatgpt/adapter/thudm/chatglm_6b.py", line 29, in ask
+    response = await self.client.post(
+                     │    │      └ <function AsyncClient.post at 0x7fcc1e6e5f80>
+                     │    └ <httpx.AsyncClient object at 0x7fcbe8cfe810>
+                     └ <adapter.thudm.chatglm_6b.ChatGLM6BAdapter object at 0x7fcbe8cdeb50>
+
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpx/_client.py", line 1848, in post
+    return await self.request(
+                 │    └ <function AsyncClient.request at 0x7fcc1e6e5940>
+                 └ <httpx.AsyncClient object at 0x7fcbe8cfe810>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpx/_client.py", line 1530, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+                 │    │    │             │                      └ <httpx._client.UseClientDefault object at 0x7fcc1e6d6410>
+                 │    │    │             └ <httpx._client.UseClientDefault object at 0x7fcc1e6d6410>
+                 │    │    └ <Request('POST', 'http://192.168.31.117:8000')>
+                 │    └ <function AsyncClient.send at 0x7fcc1e6e5b20>
+                 └ <httpx.AsyncClient object at 0x7fcbe8cfe810>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpx/_client.py", line 1617, in send
+    response = await self._send_handling_auth(
+                     │    └ <function AsyncClient._send_handling_auth at 0x7fcc1e6e5bc0>
+                     └ <httpx.AsyncClient object at 0x7fcbe8cfe810>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpx/_client.py", line 1645, in _send_handling_auth
+    response = await self._send_handling_redirects(
+                     │    └ <function AsyncClient._send_handling_redirects at 0x7fcc1e6e5c60>
+                     └ <httpx.AsyncClient object at 0x7fcbe8cfe810>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpx/_client.py", line 1682, in _send_handling_redirects
+    response = await self._send_single_request(request)
+                     │    │                    └ <Request('POST', 'http://192.168.31.117:8000')>
+                     │    └ <function AsyncClient._send_single_request at 0x7fcc1e6e5d00>
+                     └ <httpx.AsyncClient object at 0x7fcbe8cfe810>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpx/_client.py", line 1719, in _send_single_request
+    response = await transport.handle_async_request(request)
+                     │         │                    └ <Request('POST', 'http://192.168.31.117:8000')>
+                     │         └ <function AsyncHTTPTransport.handle_async_request at 0x7fcc1e6daca0>
+                     └ <httpx.AsyncHTTPTransport object at 0x7fcbe8d05cd0>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpx/_transports/default.py", line 352, in handle_async_request
+    with map_httpcore_exceptions():
+         └ <function map_httpcore_exceptions at 0x7fcc1ea54c20>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+    │    │   │     │    │      └ <traceback object at 0x7fcbd3719800>
+    │    │   │     │    └ RemoteProtocolError('Server disconnected without sending a response.')
+    │    │   │     └ <class 'httpcore.RemoteProtocolError'>
+    │    │   └ <method 'throw' of 'generator' objects>
+    │    └ <generator object map_httpcore_exceptions at 0x7fcbd37ac340>
+    └ <contextlib._GeneratorContextManager object at 0x7fcbe8d14a90>
+  File "/home/kira/anaconda3/envs/chataki/lib/python3.11/site-packages/httpx/_transports/default.py", line 77, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+          │          └ 'Server disconnected without sending a response.'
+          └ <class 'httpx.RemoteProtocolError'>
+
+httpx.RemoteProtocolError: Server disconnected without sending a response.
+2023-07-25 10:14:16.398 | DEBUG    | platforms.onebot_bot:respond:112 - [OneBot] 尝试发送消息：出现故障！如果这个问题持续出现，请和我说“重置会话” 来开启一段新的会话，或者发送 “回滚会话” 来回溯到上一条对话，你上一条说的我就当作没看见。
+Server disconnected without sending a response.
+2023-07-25 10:16:29.817 | DEBUG    | platforms.onebot_bot:_:148 - 私聊消息：1
+2023-07-25 10:16:29.818 | DEBUG    | middlewares.concurrentlock:handle_request:40 - [Concurrent] 排队中，前面还有 0 个人！
+2023-07-25 10:16:29.819 | DEBUG    | middlewares.concurrentlock:handle_request:42 - [Concurrent] 排到了！
+2023-07-25 10:16:29.820 | DEBUG    | middlewares.timeout:create_timeout_task:55 - [Timeout] 开始计时……
+2023-07-25 10:16:33.996 | DEBUG    | middlewares.timeout:handle_respond:46 - [Timeout] 取消计时……
+2023-07-25 10:16:33.996 | DEBUG    | platforms.onebot_bot:respond:112 - [OneBot] 尝试发送消息：嘿~你好呀~我是莉莉，一个可爱的17岁少女，很高兴能和你聊天喔！有什么我可以帮你的吗？😊
+2023-07-25 10:16:34.034 | DEBUG    | middlewares.timeout:create_timeout_task:55 - [Timeout] 开始计时……
