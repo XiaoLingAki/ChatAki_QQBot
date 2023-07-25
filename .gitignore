@@ -169,4 +169,4 @@ Dockerfile.dev
 **/.DS_Store
 venv/
 *.out
-chatgpt/*.out
+/chatgpt/nohup.out
