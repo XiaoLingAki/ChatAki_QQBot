@@ -170,4 +170,4 @@ Dockerfile.dev
 venv/
 *.out
 /chatgpt/nohup.out
-/chatgpt/data
+/chatgpt/data/
