@@ -4,7 +4,20 @@ import os
 
 
 def chatgpt_pro(history):
-
+    # print(openai.api_key)
+    print(type(history))
+    print(history)
+    
+    prompt_len = 0
+    for h in history:
+        print(h)
+        prompt_len += len(h['content'])
+        print(prompt_len)
+    
+    while prompt_len > 4399:
+        prompt_len = prompt_len - len(history[1]['content'])
+        history = [history[0]] + history[2:]
+    
     url = "https://api.openai-proxy.com/v1/chat/completions"
     # url = "https://api.openai.com/v1/chat/completions"
     headers = {

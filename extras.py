@@ -1,8 +1,12 @@
 from utils import *
 
+chat_id = 0
+chat_name = ''
 chat_histories = {}
 def digital_person_chat(prompt, text, user_name='用户'):
 
+    global chat_id
+    global chat_name
     global chat_histories
     if 'chat_histories' not in globals():
         # 如果chat_histories字典不存在，则创建一个新的字典
@@ -16,7 +20,7 @@ def digital_person_chat(prompt, text, user_name='用户'):
     print('生成中……\n')
 
     chat_histories[prompt].append({"role": "user", "content": text})
-    print(chat_histories[prompt])
+    # print(chat_histories[prompt])
     # print(prompt_pre + prompt + prompt_rea + history + text)
     result = chatgpt_pro(chat_histories[prompt])
     chat_histories[prompt].append({"role":"assistant","content":result})

@@ -27,7 +27,7 @@ def response_create(prompt):
     if "#定型文：开会" in prompt:
         response = meeting(prompt)
     elif "#Readme" in prompt or "#help" in prompt or "#h" in prompt:
-        response = '''聊天粉毛QQ版 beta 0.1
+        response = '''聊天粉毛QQ版 beta 0.2
         命令：“#粉毛 #猫娘 #猫 #定型文：开会 #定型文：互联网黑话 #键政 #初音未来”
         默认（不加#）为粉毛
         使用“#切换功能：XX”切换默认的功能
@@ -70,7 +70,13 @@ async def create_item(request: Request):
     temperature = json_post_list.get('temperature')
 
     # response = chatgpt(prompt)
-    response = response_create(prompt)
+    notice = ""
+    if len(prompt) > 3000:
+        prompt = prompt[0:3000]
+        notice = "(输入字符数超过3000，截断后面的输入)"
+        
+    
+    response = notice + response_create(prompt)
     # response = "只要看到这个就说明能接收消息"
     history = []
     # response, history = model.chat(tokenizer,
