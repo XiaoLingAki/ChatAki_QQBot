@@ -6296,3 +6296,10 @@ Server disconnected without sending a response.
 2023-07-25 10:16:33.996 | DEBUG    | middlewares.timeout:handle_respond:46 - [Timeout] 取消计时……
 2023-07-25 10:16:33.996 | DEBUG    | platforms.onebot_bot:respond:112 - [OneBot] 尝试发送消息：嘿~你好呀~我是莉莉，一个可爱的17岁少女，很高兴能和你聊天喔！有什么我可以帮你的吗？😊
 2023-07-25 10:16:34.034 | DEBUG    | middlewares.timeout:create_timeout_task:55 - [Timeout] 开始计时……
+2023-07-25 10:19:43.892 | DEBUG    | platforms.onebot_bot:_:148 - 私聊消息：1
+2023-07-25 10:19:43.894 | DEBUG    | middlewares.concurrentlock:handle_request:40 - [Concurrent] 排队中，前面还有 0 个人！
+2023-07-25 10:19:43.894 | DEBUG    | middlewares.concurrentlock:handle_request:42 - [Concurrent] 排到了！
+2023-07-25 10:19:43.896 | DEBUG    | middlewares.timeout:create_timeout_task:55 - [Timeout] 开始计时……
+2023-07-25 10:19:48.329 | DEBUG    | middlewares.timeout:handle_respond:46 - [Timeout] 取消计时……
+2023-07-25 10:19:48.330 | DEBUG    | platforms.onebot_bot:respond:112 - [OneBot] 尝试发送消息：嗨~！你好呀！我是莉莉，一个17岁的可爱少女，很高兴认识你！有什么我可以帮到你的吗？😊
+2023-07-25 10:19:48.366 | DEBUG    | middlewares.timeout:create_timeout_task:55 - [Timeout] 开始计时……
