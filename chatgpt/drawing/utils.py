@@ -1,15 +1,14 @@
 import openai
 import requests
-import time
+import os
 
-from loguru import logger
 
 model_list = ["gpt-3.5-turbo","gpt-4-0613"]
 
 def chatgpt_pro(history):
     # print(openai.api_key)
-    # print(type(history))
-    logger.debug(history)
+    print(type(history))
+    print(history)
     
     prompt_len = 0
     for h in history:
@@ -32,12 +31,10 @@ def chatgpt_pro(history):
         "model": "gpt-4-0613",
         "messages": history
     }
-    time1 = time.time()
+
     response = requests.post(url, headers=headers, json=payload)
-    time2 = time.time()
-    if response.status_code == 200 or response.status_code == 202:
+    if response.status_code == 200:
         completion = response.json()
-        logger.debug(time2-time1)
         return completion["choices"][0]["message"]["content"]
     else:
         print(f"Error: {response.status_code} - {response.text}")

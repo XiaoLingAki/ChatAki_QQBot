@@ -324,19 +324,19 @@ class Trigger(BaseModel):
     """全局的触发响应前缀，同时适用于私聊和群聊，默认不需要"""
     prefix_friend: List[str] = []
     """私聊中的触发响应前缀，默认不需要"""
-    prefix_group: List[str] = []
+    prefix_group: List[str] = ["粉毛"]
     """群聊中的触发响应前缀，默认不需要"""
 
     prefix_ai: Dict[str, List[str]] = {}
     """特定类型 AI 的前缀，以此前缀开头将直接发消息至指定 AI 会话"""
 
-    require_mention: Literal["at", "mention", "none"] = "at"
+    require_mention: Literal["at", "mention", "none"] = "mention"
     """群内 [需要 @ 机器人 / 需要 @ 或以机器人名称开头 / 不需要 @] 才响应（请注意需要先 @ 机器人后接前缀）"""
     reset_command: List[str] = ["重置会话"]
     """重置会话的命令"""
     rollback_command: List[str] = ["回滚会话"]
     """回滚会话的命令"""
-    prefix_image: List[str] = ["画", "看"]
+    prefix_image: List[str] = ["画", "看", "画一个", "#画图 ", "draw"]
     """图片创建前缀"""
     switch_model: str = r"切换模型 (.+)"
     """切换当前上下文的模型"""
@@ -375,37 +375,36 @@ class Response(BaseModel):
     default_ai: Union[str, None] = None
     """默认使用的 AI 类型，不填写时自动推测"""
 
-    error_format: str = "出现故障！如果这个问题持续出现，请和我说“重置会话” 来开启一段新的会话，或者发送 “回滚对话” 来回溯到上一条对话，你上一条说的我就当作没看见。\n原因：{exc}"
+    error_format: str = "哔叽！粉毛被撅晕了！正在抢修中，请坐下和放宽~\ntechnique information：{exc}"
     """发生错误时发送的消息，请注意可以插入 {exc} 作为异常占位符"""
 
-    error_network_failure: str = "网络故障！连接服务器失败，我需要更好的网络才能服务！\n{exc}"
+    error_network_failure: str = "哔叽！发生网络错误！\n{exc}"
     """发生网络错误时发送的消息，请注意可以插入 {exc} 作为异常占位符"""
 
-    error_session_authenciate_failed: str = "身份验证失败！无法登录至 ChatGPT 服务器，请检查账号信息是否正确！\n{exc}"
+    error_session_authenciate_failed: str = "哔叽！OpenAI炸服了！\n{exc}"
     """发生网络错误时发送的消息，请注意可以插入 {exc} 作为异常占位符"""
 
-    error_request_too_many: str = "糟糕！当前 ChatGPT 接入点收到的请求太多了，我需要一段时间冷静冷静。请过一会儿再来找我！\n预计恢复时间：{exc}(Code: 429)\n"
+    error_request_too_many: str = "哔叽！当前 ChatGPT 接入点收到的请求过多昏厥了！\n"
 
-    error_request_concurrent_error: str = "当前有其他人正在和我进行聊天，请稍后再给我发消息吧！"
+    error_request_concurrent_error: str = "哔叽！粉毛繁忙中！"
 
-    error_server_overloaded: str = "抱歉，当前服务器压力有点大，请稍后再找我吧！"
+    error_server_overloaded: str = "哔叽！当前使用人数过多，粉毛被注满了！"
     """服务器提示 429 错误时的回复 """
 
-    error_drawing: str = "画图失败！原因： {exc}"
+    error_drawing: str = "哔叽！画图失败！原因： {exc}"
 
     placeholder: str = (
-        "您好！我是 Assistant，一个由 OpenAI 训练的大型语言模型。我不是真正的人，而是一个计算机程序，可以通过文本聊天来帮助您解决问题。如果您有任何问题，请随时告诉我，我将尽力回答。\n"
-        "如果您需要重置我们的会话，请回复`重置会话`。"
+        "哔叽！粉毛加载中，请稍等~"
     )
     """对空消息回复的占位符"""
 
     reset = "会话已重置。"
     """重置会话时发送的消息"""
 
-    rollback_success = "已回滚至上一条对话，你刚刚发的我就忘记啦！"
+    rollback_success = "哔叽！已回滚至上一条对话！"
     """成功回滚时发送的消息"""
 
-    rollback_fail = "回滚失败，没有更早的记录了！如果你想要重新开始，请发送：{reset}"
+    rollback_fail = "哔叽！回滚失败，没有更早的记录了！如果你想要重新开始，请发送：{reset}"
     """回滚失败时发送的消息"""
 
     quote: bool = True
@@ -420,19 +419,19 @@ class Response(BaseModel):
     max_timeout: float = 600.0
     """最长等待时间，超过此时间取消回应"""
 
-    cancel_wait_too_long: str = "啊哦，这个问题有点难，让我想了好久也没想明白。试试换个问法？"
+    cancel_wait_too_long: str = "哔叽！粉毛发呆了，请再等一段时间或重试！"
     """发送提醒前允许的响应时间"""
 
     max_queue_size: int = 10
     """等待处理的消息的最大数量，如果要关闭此功能，设置为 0"""
 
-    queue_full: str = "抱歉！我现在要回复的人有点多，暂时没有办法接收新的消息了，请过会儿再给我发吧！"
+    queue_full: str = "哔叽！当前使用人数过多，粉毛被注满了！"
     """队列满时的提示"""
 
     queued_notice_size: int = 3
     """新消息加入队列会发送通知的长度最小值"""
 
-    queued_notice: str = "消息已收到！当前我还有{queue_size}条消息要回复，请您稍等。"
+    queued_notice: str = "哔叽！消息已收到！当前还有{queue_size}条消息要回复，请稍等。"
     """新消息进入队列时，发送的通知。 queue_size 是当前排队的消息数"""
 
     ping_response: str = "当前AI：{current_ai} / 当前语音：{current_voice}\n指令：\n切换AI XXX / 切换语音 XXX" \

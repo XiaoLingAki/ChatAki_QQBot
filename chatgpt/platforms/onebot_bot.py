@@ -109,10 +109,15 @@ def transform_from_message_chain(chain: MessageChain):
 
 def response(event, is_group: bool):
     async def respond(resp):
+        logger.warning(resp)
+        print(type(resp))
         logger.debug(f"[OneBot] 尝试发送消息：{str(resp)}")
         try:
             if not isinstance(resp, MessageChain):
+                logger.debug("messageChain")
                 resp = MessageChain(resp)
+            else:
+                logger.debug("NOTmessageChain")
             resp = transform_from_message_chain(resp)
             if config.response.quote and '[CQ:record,file=' not in str(resp):  # skip voice
                 resp = MessageSegment.reply(event.message_id) + resp

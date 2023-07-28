@@ -51,6 +51,9 @@ def response_create(prompt):
         response = politician(prompt)
     elif "#echo" in prompt:
         response = '粉毛摸鱼中，勿cue'
+    elif "#重置对话记录" in prompt:
+        session_manager.reset()
+        response = '哔嘟~已删除聊天记录'
     else:
         response = response_create(personnality + prompt)
 
@@ -71,15 +74,17 @@ async def create_item(request: Request):
 
     # response = chatgpt(prompt)
     notice = ""
-    if len(prompt) > 3000:
-        prompt = prompt[0:3000]
+    if len(prompt) > 8000:
+        prompt = prompt[0:8000]
         notice = "(输入字符数超过3000，截断后面的输入)"
         
-    
-    response = response_create(prompt)
-    if response is None:
+    try:
+        response = response_create(prompt)
+        response = notice + response
+        print(response)
+    except Exception:
+        logger.debug(response)
         response = "粉毛被撅晕了！正在抢修中，请坐下和放宽~"
-    response = notice + response
 
     # response = "只要看到这个就说明能接收消息"
     history = []

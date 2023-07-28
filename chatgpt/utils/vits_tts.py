@@ -39,7 +39,7 @@ class VitsAPI:
         return voice_name
 
     async def get_json_data(self, new_id):
-        url = f"{config.vits.api_url}/check"
+        url = f"{config.vits.api_url}/voice/check?id={new_id}&model=vits"
 
         try:
             async with ClientSession(timeout=ClientTimeout(total=config.vits.timeout)) as session:
@@ -47,6 +47,7 @@ class VitsAPI:
                 form_data.add_field("model", "vits")
                 form_data.add_field("id", new_id)
                 async with session.post(url=url, data=form_data) as res:
+                    logger.debug(res)
                     return await res.json()
         except Exception as e:
             logger.error(f"获取语音音色列表失败: {str(e)}")
@@ -86,8 +87,23 @@ class VitsAPI:
         return integer_number
 
     async def get_voice_data(self, text, lang, voice_type):
-        url = f"{config.vits.api_url}?text={text}&lang={lang}&id={self.id}&format={voice_type}&length={config.vits.speed}"
-
+        
+        # fields = {
+        # "text": text,
+        # "id": str(id),
+        # "format": format,
+        # "lang": lang,
+        # "length": str(length),
+        # "noise": str(noise),
+        # "noisew": str(noisew),
+        # "max": str(max)
+        # }
+        # boundary = '----VoiceConversionFormBoundary' + ''.join(random.sample(string.ascii_letters + string.digits, 16))
+        # m = MultipartEncoder(fields=fields, boundary=boundary)
+        # url = f"{config.vits.api_url}/voice"
+        
+        url = f"{config.vits.api_url}/voice/vits?text={text}&lang={lang}&id={self.id}&format={voice_type}&length={config.vits.speed}"
+        logger.debug(url)
         async with ClientSession(timeout=ClientTimeout(total=config.vits.timeout)) as session:
             try:
                 async with session.get(url) as response:

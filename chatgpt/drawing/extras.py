@@ -13,11 +13,13 @@ class ChatSessionManager:
 session_manager = ChatSessionManager()
 
 def digital_person_chat(prompt, text, user_name='用户'):
-    
-    # print(prompt)
 
     global session_manager
     chat_histories = session_manager.chat_histories
+    
+    if 'chat_histories' not in globals():
+        # 如果chat_histories字典不存在，则创建一个新的字典
+        chat_histories = {}
 
     if prompt not in chat_histories:
         # 如果当前prompt对应的history列表不存在，则创建一个新的空列表
@@ -30,9 +32,7 @@ def digital_person_chat(prompt, text, user_name='用户'):
     # print(chat_histories[prompt])
     # print(prompt_pre + prompt + prompt_rea + history + text)
     result = chatgpt_pro(chat_histories[prompt])
-    # result = "测试中~"
     chat_histories[prompt].append({"role":"assistant","content":result})
-    # print(chat_histories[prompt])
     return result
 
 def meeting(prompt):
@@ -93,27 +93,3 @@ def miku(prompt):
 def politician(prompt):
     title = '''现在开始你就是一位精通政治、历史、经济问题的国际形势观察员。请你以这个身份与我对话，回答我提出的问题。'''
     return digital_person_chat(title, prompt[3:])
-
-def prompt_translator(prompt):
-    history = [
-        {'role': 'system', 'content': '请将以下的自然语言描述转换成由多个英语单词构成的特征描述。'},
-        {'role': 'user', 'content': '一个粉红色头发的高中女孩，在夜晚的城市，穿着学生装'},
-        {'role': 'assistant', 'content': 'pink hair, high school girl, city, night, school suit'},
-        {'role': 'user', 'content': '一个穿着中国传统服装的少女，在古代中国风格的街道，举着一把伞'},
-        {'role': 'assistant', 'content': 'chinese, china dress, ancient China, umbralla, girl'},
-        {'role': 'user', 'content': '一个穿着泳装的粉红色头发少女站在阳光下的沙滩上'},
-        {'role': 'assistant', 'content': 'swimsuit, girl, beach, sunshine, pink hair'},
-        {'role': 'user', 'content': '一个短发少女站在清晨的城市中，穿着水手服，仰望着镜头'},
-        {'role': 'assistant', 'content': 'short hair, girl, morning, city, from above, sailor dress'},
-        {'role': 'user', 'content': '一个短发少女站在清晨的城市中，穿着水手服，俯视着镜头'},
-        {'role': 'assistant', 'content': 'short hair, girl, morning, city, from below, sailor dress'},
-        {'role': 'user', 'content': '一个双马尾少女站在清晨的城市中，穿着水手服，仰望着镜头'},
-        {'role': 'assistant', 'content': 'twin-tails, girl, morning, city, sailor dress, from above'},
-        {'role': 'user', 'content': prompt}
-               ]
-    return chatgpt_pro(history)
-
-if __name__ == '__main__':
-    # print(openai.api_key)
-    print(prompt_translator("一个粉红色长发少女站在清晨的城市中，穿着水手服，仰望着镜头"))
-    # print(openai.Model.list())

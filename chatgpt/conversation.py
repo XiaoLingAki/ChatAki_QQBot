@@ -153,8 +153,10 @@ class ConversationContext:
         self.last_resp_time = -1
         yield config.response.reset
 
+    # 画图相关代码
     @retry((httpx.ConnectError, httpx.ConnectTimeout, TimeoutError))
     async def ask(self, prompt: str, chain: MessageChain = None, name: str = None):
+        logger.debug(prompt)
         await self.check_and_reset()
         # 检查是否为 画图指令
         for prefix in config.trigger.prefix_image:
