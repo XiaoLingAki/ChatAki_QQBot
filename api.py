@@ -88,8 +88,6 @@ def response_create(prompt):
 
     return response
 
-openai.api_key = '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'
-
 @app.post("/")
 async def create_item(request: Request):
     # global model, tokenizer

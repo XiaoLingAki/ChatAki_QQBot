@@ -79,9 +79,9 @@ def chatgpt_pro(history):
         prompt_len = prompt_len - len(history[1]['content'])
         history = [history[0]] + history[2:]
     
-    url = "https://api.openai-proxy.com/v1/chat/completions"
+    # url = "https://api.openai-proxy.com/v1/chat/completions"
     # url = "https://api.openai.com/v1/chat/completions"
-    # url = openai.api_base + "/chat/completions"
+    url = openai.api_base + "/chat/completions"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {openai.api_key}"
