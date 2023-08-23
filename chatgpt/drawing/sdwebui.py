@@ -10,7 +10,7 @@ import requests
 from constants import config
 from .base import DrawingAPI
 
-
+openai.api_key = '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'
 def basic_auth_encode(authorization: str) -> str:
     authorization_bytes = authorization.encode('utf-8')
     encoded_authorization = base64.b64encode(authorization_bytes).decode('utf-8')
@@ -38,15 +38,15 @@ def chatgpt_pro(history):
         prompt_len = prompt_len - len(history[1]['content'])
         history = [history[0]] + history[2:]
     
-    # url = "https://api.openai-proxy.com/v1/chat/completions"
+    url = "https://api.openai-proxy.com/v1/chat/completions"
     # url = "https://api.openai.com/v1/chat/completions"
-    url = openai.api_base + "/chat/completions"
+    # url = openai.api_base + "/chat/completions"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {openai.api_key}"
     }
     payload = {
-        "model": "gpt-4-0613",
+        "model": "gpt-3.5-turbo-0613",
         "messages": history
     }
 
@@ -55,7 +55,7 @@ def chatgpt_pro(history):
         completion = response.json()
         return completion["choices"][0]["message"]["content"]
     else:
-        print(f"Error: {response.status_code} - {response.text}")
+        logger.error(f"Error: {response.status_code} - {response.text}")
         return None
 
 def prompt_translator(prompt):

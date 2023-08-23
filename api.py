@@ -1,7 +1,9 @@
 from fastapi import FastAPI, Request
 import uvicorn, json, datetime
+import re
 
 from extras import *
+from utils import session_manager
 
 # DEVICE = "cuda"
 # DEVICE_ID = "0"
@@ -23,6 +25,7 @@ personnality = '#粉毛'
 def response_create(prompt):
 
     global personnality
+    # global session_manager
     print(personnality)
     if "#定型文：开会" in prompt:
         response = meeting(prompt)
@@ -32,7 +35,18 @@ def response_create(prompt):
         默认（不加#）为粉毛
         使用“#切换功能：XX”切换默认的功能
         例如“#切换功能：猫娘”
-        之后默认就是猫娘'''
+        之后默认就是猫娘
+        命令：“#保存会话记录 槽位”
+        将当前会话状态保存到指定槽位（整数1-10，默认为1）
+        命令：“#读取会话记录 槽位”
+        从指定槽位加载会话状态
+        命令：“画个/画一个 【描述】 --height=num --width=num”
+        使用stable diffusion生成一张像素为width*height的图
+        命令：“切换语音 编号”
+        开启语音生成并切换为指定音色
+        命令：“#echo”
+        检查机器人是否在线
+        '''
     elif "#切换功能" in prompt:
         if prompt[6:] in per_list:
             personnality = '#' + prompt[6:]
@@ -54,11 +68,27 @@ def response_create(prompt):
     elif "#重置对话记录" in prompt:
         session_manager.reset()
         response = '哔嘟~已删除聊天记录'
+    elif "#保存会话状态" in prompt:
+        match = re.search(r'\d+', prompt)
+        id = int(match.group())
+        logger.debug(id)
+        session_manager.save(id)
+        response = f'哔嘟~已保存聊天记录到槽位{id}'
+    elif "#读取会话状态" in prompt:
+        match = re.search(r'\d+', prompt)
+        id = int(match.group())
+        logger.debug(id)
+        session_manager.load(id)
+        response = f'哔嘟~已加载聊天记录自槽位{id}'
+    elif "#查看聊天记录" in prompt:
+        session_manager.printchat()
+        response = ' '
     else:
         response = response_create(personnality + prompt)
 
     return response
 
+openai.api_key = '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'
 
 @app.post("/")
 async def create_item(request: Request):
@@ -72,20 +102,22 @@ async def create_item(request: Request):
     top_p = json_post_list.get('top_p')
     temperature = json_post_list.get('temperature')
 
-    # response = chatgpt(prompt)
+    response = ""
     notice = ""
     if len(prompt) > 8000:
         prompt = prompt[0:8000]
-        notice = "(输入字符数超过3000，截断后面的输入)"
+        notice = "(输入字符数超过8000，截断后面的输入)"
         
-    try:
-        response = response_create(prompt)
-        response = notice + response
-        print(response)
-    except Exception:
-        logger.debug(response)
-        response = "粉毛被撅晕了！正在抢修中，请坐下和放宽~"
-
+    # try:
+    #     response = response_create(prompt)
+    #     response = notice + response
+    #     print(response)
+    # except Exception:
+    #     logger.debug(response)
+    #     response = "粉毛被撅晕了！正在抢修中，请坐下和放宽~"
+    response = response_create(prompt)
+    response = notice + response
+    print(response)
     # response = "只要看到这个就说明能接收消息"
     history = []
     # response, history = model.chat(tokenizer,

@@ -1,40 +1,5 @@
 from utils import *
 
-# b.py
-class ChatSessionManager:
-    def __init__(self):
-        self.chat_histories = {}
-        self.chat_id = 0
-        self.chat_name = ''
-
-    def reset(self):
-        self.chat_histories = {}
-
-session_manager = ChatSessionManager()
-
-def digital_person_chat(prompt, text, user_name='用户'):
-    
-    # print(prompt)
-
-    global session_manager
-    chat_histories = session_manager.chat_histories
-
-    if prompt not in chat_histories:
-        # 如果当前prompt对应的history列表不存在，则创建一个新的空列表
-        chat_histories[prompt] = [{"role": "system", "content": prompt}]
-
-
-    print('生成中……\n')
-
-    chat_histories[prompt].append({"role": "user", "content": text})
-    # print(chat_histories[prompt])
-    # print(prompt_pre + prompt + prompt_rea + history + text)
-    result = chatgpt_pro(chat_histories[prompt])
-    # result = "测试中~"
-    chat_histories[prompt].append({"role":"assistant","content":result})
-    # print(chat_histories[prompt])
-    return result
-
 def meeting(prompt):
 
     title = '''这是一段定型文格式：
