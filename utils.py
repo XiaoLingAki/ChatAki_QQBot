@@ -8,6 +8,9 @@ import os
 from loguru import logger
 
 model_list = ["gpt-3.5-turbo","gpt-4-0613"]
+# openai.api_key = "sk-8Pv9elfAVKqS6UpxEa00Ec09391f421f856dB68eDbE29072"
+# openai.api_base = "https://ngapi.xyz/v1"
+
 
 class ChatSessionManager:
     def __init__(self, histories = {}):
@@ -68,6 +71,7 @@ def chatgpt_pro(history):
     # print(openai.api_key)
     # print(type(history))
     logger.debug(history)
+    logger.debug(openai.api_key)
     
     prompt_len = 0
     for h in history:
@@ -79,15 +83,15 @@ def chatgpt_pro(history):
         prompt_len = prompt_len - len(history[1]['content'])
         history = [history[0]] + history[2:]
     
-    # url = "https://api.openai-proxy.com/v1/chat/completions"
+    url = "https://api.openai-proxy.com/v1/chat/completions"
     # url = "https://api.openai.com/v1/chat/completions"
-    url = openai.api_base + "/chat/completions"
+    # url = "https://ngapi.xyz/v1/chat/completions"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {openai.api_key}"
     }
     payload = {
-        "model": "gpt-3.5-turbo-0613",
+        "model": "gpt-3.5-turbo",
         "messages": history
     }
     time1 = time.time()

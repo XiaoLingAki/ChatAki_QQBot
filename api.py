@@ -135,8 +135,9 @@ async def create_item(request: Request):
     log = "[" + time + "] " + '", prompt:"' + prompt + '", response:"' + repr(response) + '"'
     print(log)
     # torch_gc()
+    # return JsonResponse({'processed_string': prompt})
     return answer
 
 
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=8000, workers=1)
+    uvicorn.run(app, host='0.0.0.0', port=8080, workers=1)

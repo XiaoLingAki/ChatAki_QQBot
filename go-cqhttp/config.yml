@@ -1,7 +1,7 @@
 # go-cqhttp 默认配置文件
 
 account: # 账号相关
-  uin: 1654613655 # QQ账号
+  uin: 1295963968 # QQ账号
   password: '' # 密码为空时使用扫码登录
   encrypt: false  # 是否开启密码加密
   status: 0      # 在线状态 请参考 https://docs.go-cqhttp.org/guide/config.html#在线状态
@@ -109,7 +109,7 @@ servers:
   - ws-reverse:
       # 反向WS Universal 地址
       # 注意 设置了此项地址后下面两项将会被忽略
-      universal: ws://192.168.31.117:8566/ws
+      universal: ws://192.168.31.173:8566/ws
       # 反向WS API 地址
       api: ws://your_websocket_api.server
       # 反向WS Event 地址

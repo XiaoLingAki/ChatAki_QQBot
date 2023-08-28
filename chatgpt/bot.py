@@ -1,8 +1,7 @@
 import os
 import sys
-
-sys.path.append(os.getcwd())
 import creart
+sys.path.append(os.getcwd())
 from asyncio import AbstractEventLoop
 import asyncio
 from utils.exithooks import hook
