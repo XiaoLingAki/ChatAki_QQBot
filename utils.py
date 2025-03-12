@@ -4,75 +4,150 @@ import time
 import json
 import sqlite3
 import os
+import jwt
+import base64
+from PIL import Image
+from io import BytesIO
 
 from loguru import logger
+from session import ChatSessionManager_GLM as CM
+from zhipuai import ZhipuAI
 
 model_list = ["gpt-3.5-turbo","gpt-4-0613"]
-# openai.api_key = "sk-8Pv9elfAVKqS6UpxEa00Ec09391f421f856dB68eDbE29072"
-# openai.api_base = "https://ngapi.xyz/v1"
+# openai.api_base = "https://api.xty.app/v1"
 
+session_manager = CM()
 
-class ChatSessionManager:
-    def __init__(self, histories = {}):
-        self.chat_histories = histories
-        # self.chat_id = 0
-        # self.chat_name = ''
-        # 建立数据库连接
-        self.conn = sqlite3.connect('chats.db')
-        self.cursor = self.conn.cursor()
+# GLM API鉴权函数
+def generate_token(apikey: str, exp_seconds: int):
+    try:
+        id, secret = apikey.split(".")
+    except Exception as e:
+        raise Exception("invalid apikey", e)
 
-        # 创建表格
-        self.cursor.execute('''CREATE TABLE IF NOT EXISTS sessions
-                              (id INTEGER PRIMARY KEY, content TEXT, filename TEXT)''')
+    payload = {
+        "api_key": id,
+        "exp": int(round(time.time() * 1000)) + exp_seconds * 1000,
+        "timestamp": int(round(time.time() * 1000)),
+    }
 
+    return jwt.encode(
+        payload,
+        secret,
+        algorithm="HS256",
+        headers={"alg": "HS256", "sign_type": "SIGN"},
+    )
 
-    def reset(self):
-        self.chat_histories = {}
-        
-    def save(self, id = 1):
-        logger.debug(f"保存到槽位{id}")
-        # 生成JSON文件名
-        save_directory = "save"
-        os.makedirs(save_directory, exist_ok=True)
-        filename = os.path.join(save_directory, f'session_{id}.json')
+def image_generate_glm(prompt):
+    api_key = os.environ["ZHIPUAI_API_KEY"]
+    client = ZhipuAI(api_key) # 请填写您自己的APIKey
+    response = client.images.generations(
+        model="cogview-3", #填写需要调用的模型名称
+        prompt=prompt,
+    )
+    image_url = response.data[0].url
+    image_data = requests.get(image_url)
 
-        # 将chat_histories保存为JSON文件
-        with open(filename, 'w') as file:
-            json.dump(self.chat_histories, file)
+    image_stream = BytesIO(image_data.content)
 
-        # 执行插入或更新语句
-        self.cursor.execute("INSERT OR REPLACE INTO sessions (id, filename) VALUES (?, ?)", (id, filename))
+    image = Image.open(image_stream)
+    image.save('output_image.png')
 
-        # 提交更改
-        self.conn.commit()
+    result = base64.b64encode(image_data.content)
+    return result
 
-        
-    def load(self, id = 1):
-        logger.debug(f"读取到槽位{id}")
-        # 查询指定id的记录
-        self.cursor.execute("SELECT filename FROM sessions WHERE id=?", (id,))
-        result = self.cursor.fetchone()
+# GLM API生成函数
+def text_generate_glm(history):
+    
+    # logger.debug(history)
+    api_key = os.environ["ZHIPUAI_API_KEY"]
+    token = generate_token(api_key, 60)
+    url = "https://open.bigmodel.cn/api/paas/v4/chat/completions"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {token}"
+    }
 
-        # 如果找到记录，则读取对应的JSON文件，并将内容反序列化为chat_histories
-        if result is not None:
-            filename = result[0]
-            with open(filename, 'r') as file:
-                self.chat_histories = json.load(file)
-        else:
-            logger.warning("对应槽位没有数据！")
-            self.chat_histories = {}
-        
-    def printchat(self):
-        print(self.chat_histories)
-        
-session_manager = ChatSessionManager()
+    data = {
+        "model": "glm-3-turbo",
+        "messages": history,
+        "max_tokens": 8192,
+        "temperature": 0.8,
+        "stream": False
+    }
+
+    response = requests.post(url, headers=headers, json=data)
+    ans = response.json()
+    result = ans['choices'][0]['message']['content']
+    # logger.debug("模型生成：" + result)
+    
+    return ans['choices'][0]['message']['content']
+
 
 def chatgpt_pro(history):
     # print(openai.api_key)
     # print(type(history))
     logger.debug(history)
-    logger.debug(openai.api_key)
+    # logger.debug(openai.api_key)
+    # openai.api_base = "http://localhost:8000/v1"
+    # openai.api_key = "none"
+    prompt_len = 0
+    for h in history:
+        logger.debug(h)
+        prompt_len += len(h['content'])
+        logger.debug(prompt_len)
     
+    while prompt_len > 4399:
+        prompt_len = prompt_len - len(history[1]['content'])
+        history = [history[0]] + history[2:]
+    url = "http://127.0.0.1:11434/api/chat"
+    # url = "https://localhost:8005/v1/chat/completions"
+    # url = "https://api.openai-proxy.com/v1/chat/completions"
+    # url = "https://api.xty.app/chat/completions"
+    # url = "https://api.openai.com/v1/chat/completions"
+    # url = "https://ngapi.xyz/v1/chat/completions"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {openai.api_key}"
+    }
+    payload = {
+        "model": "deepseek-r1:32b",
+        "messages": history,
+        "stream": False,
+        "options": {"temperature": 0.3}
+    }
+    time1 = time.time()
+    logger.debug(time1)
+    try:
+        response = requests.post(url, headers=headers, json=payload)
+        logger.debug(response.text)
+    except Exception as e:
+        response = f"出错了喵！【大模型接口】{e}"
+        logger.debug(response)
+        return response
+
+    time2 = time.time()
+    if response.status_code == 200 or response.status_code == 202:
+        completion = response.json()
+        logger.debug(time2-time1)
+        logger.debug(completion)
+
+        # GPT接口用这个返回语句
+        # return completion["choices"][0]["message"]["content"]
+
+        # DEEPSEEK-R1接口用这个返回语句
+        return completion["message"]["content"]
+    else:
+        print(f"Error: {response.status_code} - {response.text}")
+        return f"出错了喵！：Error: {response.status_code} - {response.text}"
+
+def chatglm_pro(history):
+    # print(openai.api_key)
+    # print(type(history))
+    logger.debug(history)
+    logger.debug(openai.api_key)
+    openai.api_base = "http://localhost:8003/v1"
+    openai.api_key = "none"
     prompt_len = 0
     for h in history:
         print(h)
@@ -83,7 +158,8 @@ def chatgpt_pro(history):
         prompt_len = prompt_len - len(history[1]['content'])
         history = [history[0]] + history[2:]
     
-    url = "https://api.openai-proxy.com/v1/chat/completions"
+    url = "https://localhost:8003/v1/chat/completions"
+    # url = "https://api.openai-proxy.com/v1/chat/completions"
     # url = "https://api.openai.com/v1/chat/completions"
     # url = "https://ngapi.xyz/v1/chat/completions"
     headers = {
@@ -105,25 +181,90 @@ def chatgpt_pro(history):
         print(f"Error: {response.status_code} - {response.text}")
         return None
 
-def digital_person_chat(prompt, text, user_name='用户'):
+def chatglm(prompt, history = []):
+    url = "http://localhost:8005"
+    headers = {
+        "Content-Type": "application/json"
+    }
+    data = {
+        "prompt": prompt,
+        "history": history
+    }
+    # logger.debug(prompt)
+    response = requests.post(url, headers=headers, json=data)
+    logger.debug(response.text)
+    response_data = json.loads(response.text)
     
+    return response_data
+
+def digital_person_chat(prompt = '', text = '你好', personality = "#粉毛", processer = "chatgpt"):
+    
+    # logger.debug(f"prompt = {prompt}")
+    logger.debug("用户: "+ text)
+    logger.debug(processer)
     chat_histories = session_manager.chat_histories
 
-    if prompt not in chat_histories:
-        # 如果当前prompt对应的history列表不存在，则创建一个新的空列表
-        chat_histories[prompt] = [{"role": "system", "content": prompt}]
+    if personality not in chat_histories:
 
+        if processer == "chatgpt":
+        # 如果当前prompt对应的history列表不存在，则创建一个新的空列表
+            # print(prompt,text,personality,processer)
+            chat_histories[personality] = [{"role": "system", "content": prompt}]
+        else:
+            # print(prompt,text,personality,processer)
+            chat_histories[personality] = [{"role": "system", "content": prompt}]
 
     print('生成中……\n')
+    try:
+        if processer == "chatgpt":
+            logger.debug("processor=chatgpt")
+            chat_histories[personality].append({"role": "user", "content": text})
+            logger.debug(chat_histories[personality])
+            # logger.debug(prompt + history + text)
+            result = chatgpt_pro(chat_histories[personality])
+            chat_histories[personality].append({"role": "assistant", "content": result})
+            logger.debug(result)
+            
+        elif processer == "chatglm":
+            # logger.debug("processor=chatglm")
+            chat_histories[personality].append({"role": "user", "content": text})
+            # logger.debug(chat_histories[personality])
+            
+            # logger.debug(chat_histories[prompt])
+            # logger.debug(prompt + history + text)
+            result = text_generate_glm(chat_histories[personality])
+            
+            chat_histories[personality].append({"role": "assistant", "content": result})
+            logger.debug("模型生成: "+ result)
+            
+        else:
+            logger.debug("processor=chatglm")
+            chat_histories[personality].append({"role": "user", "content": text})
+            logger.debug(chat_histories[personality])
+            
+            # logger.debug(chat_histories[prompt])
+            # logger.debug(prompt + history + text)
+            result = text_generate_glm(chat_histories[prompt])
+            
+            chat_histories[personality].append({"role": "assistant", "content": result})
+            logger.debug(result)
+            
+    except Exception as e:
+        print(f"连接断开了喵！")
+        result = f"出错了喵！【对话生成模块】"
 
-    chat_histories[prompt].append({"role": "user", "content": text})
-    # print(chat_histories[prompt])
-    # print(prompt_pre + prompt + prompt_rea + history + text)
-    result = chatgpt_pro(chat_histories[prompt])
     # result = "测试中~"
-    chat_histories[prompt].append({"role":"assistant","content":result})
-    # print(chat_histories[prompt])
     return result
+
+
+def response_generate(prompt, history = []):
+    url = "http://123.207.0.178:8000"
+    data = {
+        "prompt": prompt,
+        "history": history
+    }
+    response = requests.post(url, json=data)
+    return response.text
 
 
 if __name__ == '__main__':
@@ -132,4 +273,9 @@ if __name__ == '__main__':
     # {"role": "system", "content": "You are a helpful assistant."},
     # {"role": "user", "content": "There are 9 birds in the tree, the hunter shoots one, how many birds are left in the tree？"}
     # ]))
-    print(openai.Model.list())
+    # print(openai.Model.list())
+
+    print(chatgpt_pro([{'role': 'system', 'content': ''}, {'role': 'user', 'content': '下午好'}]))
+    # image_generate_glm("一只猫")
+    
+    

@@ -19,14 +19,14 @@ from utils import session_manager
 
 app = FastAPI()
 
-per_list = ['粉毛','猫娘','猫','初音未来','定型文：开会','键政']
+per_list = ['粉毛','猫娘','猫','初音未来','定型文：开会','键政','小琪','其他']
     
 personnality = '#粉毛'
 def response_create(prompt):
 
     global personnality
     # global session_manager
-    print(personnality)
+    # print(personnality)
     if "#定型文：开会" in prompt:
         response = meeting(prompt)
     elif "#Readme" in prompt or "#help" in prompt or "#h" in prompt:
@@ -53,11 +53,13 @@ def response_create(prompt):
             response = "成功切换为" + personnality
         else:
             response = "切换失败，功能还在开发中"
-    elif "#猫娘" in prompt:
+    elif "#猫娘" in prompt or "猫娘" in personnality:
         response = cat_girl(prompt)
     elif "#猫" in prompt:
         response = cat(prompt)
-    elif "#粉毛" in prompt:
+    elif "#小琪" in prompt:
+        response = aki(prompt)
+    elif "#粉毛" in prompt or "粉毛" in personnality:
         response = serika(prompt)
     elif "#初音未来" in prompt:
         response = miku(prompt)
@@ -83,8 +85,13 @@ def response_create(prompt):
     elif "#查看聊天记录" in prompt:
         session_manager.printchat()
         response = ' '
+    elif "#查看当前功能" in prompt:
+        response = '当前功能为：' + personnality
     else:
-        response = response_create(personnality + prompt)
+        if personnality == "#粉毛":
+            response = serika(prompt)
+        else:
+            response = normal(prompt)
 
     return response
 
@@ -115,7 +122,7 @@ async def create_item(request: Request):
     #     response = "粉毛被撅晕了！正在抢修中，请坐下和放宽~"
     response = response_create(prompt)
     response = notice + response
-    print(response)
+    # print(response)
     # response = "只要看到这个就说明能接收消息"
     history = []
     # response, history = model.chat(tokenizer,
@@ -133,11 +140,12 @@ async def create_item(request: Request):
         "time": time
     }
     log = "[" + time + "] " + '", prompt:"' + prompt + '", response:"' + repr(response) + '"'
-    print(log)
+    # print(log)
     # torch_gc()
     # return JsonResponse({'processed_string': prompt})
     return answer
 
 
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=8080, workers=1)
+    session_manager.reset()
+    uvicorn.run(app, host='0.0.0.0', port=8000, workers=1)
