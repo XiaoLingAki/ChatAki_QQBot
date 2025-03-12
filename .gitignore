@@ -172,3 +172,6 @@ venv/
 /chatgpt/nohup.out
 /chatgpt/data/
 /go-cqhttp/data/
+
+8000
+8001
